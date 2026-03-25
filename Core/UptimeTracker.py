@@ -11,3 +11,8 @@ class uptimeTracker():
         boottime = datetime.fromtimestamp(uptimeF)
         uptime = datetime.now() - boottime
         return uptime
+    
+    def getUptimeData(self):
+        uptime = self.get_uptime()
+        data = {}
+        lastUptimeDate = datetime.now().date()

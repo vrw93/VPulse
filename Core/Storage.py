@@ -4,22 +4,15 @@ from pathlib import Path
 import atexit
 
 class Save:
-    def __init__(self, _data):
+    def __init__(self):
         super().__init__()
         self.savePath = Path(os.getenv("APPDATA") + "\\Vrw\\UptimeTracker")
         self.savePath.mkdir(parents=True, exist_ok=True)
-        self.data = _data
 
-    def updateData(self, _data):
-        self.data = _data
-
-    def saveOnExit(self):
+    def saveOnExit(self, _data):
         atexit.unregister(self.save)
-        atexit.register(self.save, "uptime", self.data)
+        atexit.register(self.save, _data)
 
-    def save(self, key, _data):
-        dataToSave = {}
-        dataToSave[key] = _data
-
+    def save(self, _data):
         with open(self.savePath / "save.json", "w") as f:
-            json.dump(dataToSave, f)
+            json.dump(_data, f)
