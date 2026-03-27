@@ -1,5 +1,5 @@
 from Core.UptimeTracker import uptimeTracker
-from Core.Storage import Save
+from Core.Storage import Storage
 import time
 
 class main:
@@ -7,13 +7,13 @@ class main:
         super().__init__()
         self.uptimeTracker = uptimeTracker()
         self.uptime = self.uptimeTracker.getUptimeData()
-        self.save = Save()
+        self.Storage = Storage()
         try:
             while True:
                 print(f"Currently Up For {self.uptime}")
-                time.sleep(10)
-                self.uptimeData = self.uptimeTracker.getUptimeData()
-                self.save.saveOnExit(self.uptimeData)
+                self.uptime = self.uptimeTracker.getUptimeData()
+                self.Storage.saveOnExit(self.uptime)
+                time.sleep(2)
         except KeyboardInterrupt:
             print("Exiting... & Saving")
 
